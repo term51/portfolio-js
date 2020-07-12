@@ -42,7 +42,8 @@ module.exports = {
     extensions: ['.js'],
     alias: {
       '@': path.resolve(__dirname, 'src'),
-      '@core': path.resolve(__dirname, 'src/core')
+      '@core': path.resolve(__dirname, 'src/core'),
+      // '@public': path.resolve(__dirname, 'src/public')
     }
   },
   devtool: isDev ? 'source-map' : false,
@@ -53,7 +54,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HTMLWebpackPlugin({
-      template: 'index.html',
+      template: path.resolve(__dirname, 'src/public/index.html'),
       minify: {
         removeComments: isProd,
         collapseWhitespace: isProd
@@ -62,9 +63,45 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, 'src/favicon.ico'),
+          from: path.resolve(__dirname, 'src/public/img/icons/favicon.ico'),
+          to: path.resolve(__dirname, 'dist/img/icons')
+        },
+        {
+          from: path.resolve(__dirname, 'src/public/robots.txt'),
           to: path.resolve(__dirname, 'dist')
         },
+        {
+          from: path.resolve(__dirname, 'src/public/img/icons/android-chrome-144x144.png'),
+          to: path.resolve(__dirname, 'dist/img/icons')
+        },
+        {
+          from: path.resolve(__dirname, 'src/public/img/icons/apple-touch-icon.png'),
+          to: path.resolve(__dirname, 'dist/img/icons')
+        },
+        {
+          from: path.resolve(__dirname, 'src/public/img/icons/browserconfig.xml'),
+          to: path.resolve(__dirname, 'dist/img/icons')
+        },
+        {
+          from: path.resolve(__dirname, 'src/public/img/icons/favicon-16x16.png'),
+          to: path.resolve(__dirname, 'dist/img/icons')
+        },
+        {
+          from: path.resolve(__dirname, 'src/public/img/icons/favicon-32x32.png'),
+          to: path.resolve(__dirname, 'dist/img/icons')
+        },
+        {
+          from: path.resolve(__dirname, 'src/public/img/icons/mstile-150x150.png'),
+          to: path.resolve(__dirname, 'dist/img/icons')
+        },
+        {
+          from: path.resolve(__dirname, 'src/public/img/icons/safari-pinned-tab.svg'),
+          to: path.resolve(__dirname, 'dist/img/icons')
+        },
+        {
+          from: path.resolve(__dirname, 'src/public/img/icons/site.webmanifest'),
+          to: path.resolve(__dirname, 'dist/img/icons')
+        }
       ],
     }),
     new MiniCssExtractPlugin({
